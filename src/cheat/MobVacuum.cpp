@@ -30,7 +30,7 @@ namespace cheat::feature
 		ImGui::Checkbox("Mob Vacuum", &f_MobVacuum);
 	}
 
-	app::TSVector2 GetForwardPos(app::LogicEntity* actor, int32_t scalar)
+	static app::TSVector2 GetForwardPos(app::LogicEntity* actor, int32_t scalar)
 	{
 		auto playerPos = app::TrueSyncTransform_get_Position(actor->fields._tsTransform_k__BackingField, nullptr);
 		auto playerForward = app::TrueSyncTransform_get_Forward(actor->fields._tsTransform_k__BackingField, nullptr);
@@ -41,32 +41,48 @@ namespace cheat::feature
 		return forwardPos;
 	}
 
+	static void SetActorPosition(app::LogicEntity* entity, app::TSVector2 pos)
+	{
+		auto actor = CastTo<app::AdventureActor>(entity, *app::AdventureActor__TypeInfo);
+		if (!actor->fields.actorHealthInfo->fields._isAlive)
+			return;
+
+		app::TrueSyncTransform_set_Position(entity->fields._tsTransform_k__BackingField, pos, nullptr);
+		auto newY = app::CommonHelper_GetTerrainHeight_1(pos, entity->fields._tsTransform_k__BackingField->fields._positionY, nullptr);
+		app::TrueSyncTransform_set_PositionY(entity->fields._tsTransform_k__BackingField, newY, nullptr);
+		app::AdventureActor_SyncMovementLocation_1(actor, true, nullptr);
+	}
+
 	static void OnUpdate()
 	{
 		MobVacuum& instance = MobVacuum::GetInstance();
-		if (!instance.f_MobVacuum) return;
+		if (!instance.f_MobVacuum)
+			return;
 
 		auto adventureModuleController = GET_SINGLETON(AdventureModuleController);
-		if (adventureModuleController == nullptr) return;
+		if (adventureModuleController == nullptr)
+			return;
 
 		auto adventurePlayerController = GET_SINGLETON(AdventurePlayerController);
-		if (adventurePlayerController == nullptr) return;
+		if (adventurePlayerController == nullptr)
+			return;
 
 		auto monsterActors = TO_UNI_LIST(app::AdventureModuleController_get_monsterActors(adventureModuleController, nullptr), app::LogicEntity*);
-		if (monsterActors == nullptr) return;
+		if (monsterActors == nullptr)
+			return;
 
 		auto playerActor = adventurePlayerController->fields._activedPlayerActor;
-		if (playerActor == nullptr) return;
+		if (playerActor == nullptr)
+			return;
 
-		auto player = reinterpret_cast<app::LogicEntity*>(playerActor);
-		if (player == nullptr) return;
+		auto player = CastTo<app::LogicEntity>(playerActor, *app::LogicEntity__TypeInfo);
+		if (player == nullptr)
+			return;
 
 		auto targetPos = GetForwardPos(player, 3);
-
 		for (auto monster : *monsterActors)
 		{
-			auto actor = reinterpret_cast<app::AdventureActor*>(monster);
-			app::AdventureActor_Teleport(actor, targetPos, nullptr);
+			SetActorPosition(monster, targetPos);
 		}
 	}
 }

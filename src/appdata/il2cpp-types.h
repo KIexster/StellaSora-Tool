@@ -2531,6 +2531,25 @@ struct Color {
     float a;
 };
 
+struct Object__VTable {
+    VirtualInvokeData Equals;
+    VirtualInvokeData Finalize;
+    VirtualInvokeData GetHashCode;
+    VirtualInvokeData ToString;
+};
+
+struct Object__StaticFields {
+};
+
+struct Object__Class {
+    Il2CppClass_0 _0;
+    Il2CppRuntimeInterfaceOffsetPair *interfaceOffsets;
+    struct Object__StaticFields *static_fields;
+    const Il2CppRGCTXData *rgctx_data;
+    Il2CppClass_1 _1;
+    struct Object__VTable vtable;
+};
+
 struct Object {
     struct Object__Class *klass;
     MonitorData *monitor;
@@ -3951,6 +3970,51 @@ struct SpecialAttributeList {
     struct SpecialAttributeList__Class *klass;
     MonitorData *monitor;
     struct SpecialAttributeList__Fields fields;
+};
+
+struct ActorHealthInfo__Fields {
+    struct LogicComponent__Fields _;
+    struct ActorHealthInfo_HpChangedHandle *HpChangedEvent;
+    struct ActorHealthInfo_AliveChangedHandle *AliveChangedEvent;
+    struct AttributeList *attributeList;
+    struct SpecialAttributeList *specialAttributeList;
+    bool _isAlive;
+};
+
+struct ActorHealthInfo__VTable {
+    VirtualInvokeData Equals;
+    VirtualInvokeData Finalize;
+    VirtualInvokeData GetHashCode;
+    VirtualInvokeData ToString;
+    VirtualInvokeData get_ActiveSelf;
+    VirtualInvokeData set_ActiveSelf;
+    VirtualInvokeData SetEntity;
+    VirtualInvokeData Init;
+    VirtualInvokeData OnActive;
+    VirtualInvokeData OnDeactive;
+    VirtualInvokeData Shutdown;
+    VirtualInvokeData OnActive_1;
+    VirtualInvokeData OnDeactive_1;
+    VirtualInvokeData OnInit;
+    VirtualInvokeData OnShutdown;
+};
+
+struct ActorHealthInfo__StaticFields {
+};
+
+struct ActorHealthInfo__Class {
+    Il2CppClass_0 _0;
+    Il2CppRuntimeInterfaceOffsetPair *interfaceOffsets;
+    struct ActorHealthInfo__StaticFields *static_fields;
+    const Il2CppRGCTXData *rgctx_data;
+    Il2CppClass_1 _1;
+    struct ActorHealthInfo__VTable vtable;
+};
+
+struct ActorHealthInfo {
+    struct ActorHealthInfo__Class *klass;
+    MonitorData *monitor;
+    struct ActorHealthInfo__Fields fields;
 };
 
 struct AdventureActor__Fields {

@@ -165,10 +165,17 @@ template<class T>
 T* CastTo(void* pObject, void* pClass)
 {
     auto object = reinterpret_cast<app::Object*>(pObject);
-    if (object == nullptr || object->klass == nullptr || object->klass != pClass)
+    if (object == nullptr || object->klass == nullptr)
         return nullptr;
 
-    return reinterpret_cast<T*>(object);
+    auto currentClass = reinterpret_cast<Il2CppClass*>(object->klass);
+    do {
+        if (currentClass->klass == pClass)
+            return reinterpret_cast<T*>(object);
+    }
+    while ((currentClass = currentClass->parent) != nullptr);
+
+    return nullptr;
 }
 
 // Helper function to get the module base address

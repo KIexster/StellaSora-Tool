@@ -27,13 +27,16 @@ DO_APP_FUNC(0x011CB720, void, AdventureSkill_InitSkill, (AdventureSkill* __this,
 DO_APP_FUNC(0x01335290, iFP, AttributeList_GetAttributeValue, (AttributeList* __this, GameEnum_effectAttributeType__Enum type, MethodInfo* method));
 
 // Mob Vacuum
+DO_APP_FUNC(0x0121E890, void, AdventureActor_SyncMovementLocation_1, (AdventureActor* __this, bool clearPath, MethodInfo* method));
 DO_APP_FUNC(0x0158D100, List_1_LogicEntity_*, AdventureModuleController_get_monsterActors, (AdventureModuleController* __this, MethodInfo* method));
 DO_APP_FUNC(0x015988E0, void, AdventureModuleController_Update, (AdventureModuleController* __this, MethodInfo* method));
-DO_APP_FUNC(0x0121E9A0, bool, AdventureActor_Teleport, (AdventureActor* __this, TSVector2 targetPosition, MethodInfo* method));
 DO_APP_FUNC(0x00960B00, TSVector2, TrueSyncTransform_get_Position, (TrueSyncTransform* __this, MethodInfo* method));
+DO_APP_FUNC(0x01104EE0, void, TrueSyncTransform_set_Position, (TrueSyncTransform* __this, TSVector2 value, MethodInfo* method));
+DO_APP_FUNC(0x01104E20, void, TrueSyncTransform_set_PositionY, (TrueSyncTransform* __this, FP value, MethodInfo* method));
 DO_APP_FUNC(0x01104840, TSVector2, TrueSyncTransform_get_Forward, (TrueSyncTransform* __this, MethodInfo* method));
 DO_APP_FUNC(0x05226E40, TSVector2, TSVector2_op_Addition, (TSVector2 value1, TSVector2 value2, MethodInfo* method));
 DO_APP_FUNC(0x05227130, TSVector2, TSVector2_op_Multiply, (TSVector2 value, FP scaleFactor, MethodInfo* method));
+DO_APP_FUNC(0x010FA3A0, FP, CommonHelper_GetTerrainHeight_1, (TSVector2 targetPosition, FP defaultPostionY, MethodInfo* method));
 
 // Instant Break
 DO_APP_FUNC(0x0159B3F0, iFP, SpecialAttributeList_GetAttributeValue, (SpecialAttributeList* __this, GameEnum_specialAttributeType__Enum type, MethodInfo* method));
