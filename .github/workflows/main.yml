@@ -9,19 +9,19 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
 
-      - name: Build project
-        run: msbuild StellaSora.vcxproj /p:Configuration=Release /p:Platform=x64
+      - name: Build Release x64 DLL
+        run: msbuild StellaSora-Tool/StellaSora.vcxproj /p:Configuration=Release /p:Platform=x64
 
-      - name: Upload DLL
+      - name: Upload compiled DLLs
         uses: actions/upload-artifact@v4
         with:
           name: StellaSora-DLL
           path: |
-            Release/*.dll
-            x64/Release/*.dll
+            **/Release/*.dll
+            **/x64/Release/*.dll
