@@ -16,7 +16,7 @@ jobs:
         uses: microsoft/setup-msbuild@v2
 
       - name: Build Release x64 DLL
-        run: msbuild StellaSora-Tool/StellaSora.vcxproj /p:Configuration=Release /p:Platform=x64
+        run: msbuild StellaSora.vcxproj /p:Configuration=Release /p:Platform=x64
 
       - name: Upload compiled DLLs
         uses: actions/upload-artifact@v4
